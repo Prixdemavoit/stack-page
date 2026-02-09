@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture de Clémence : Un Aperçu Technique</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
+
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --primary-color: #bb86fc;
+            --primary-variant-color: #3700b3;
+            --secondary-color: #03dac6;
+            --text-color: #e0e0e0;
+            --text-secondary-color: #a0a0a0;
+            --border-color: #2c2c2c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        header .subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            font-weight: 400;
+        }
+
+        .section {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .section-header .icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: white;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .section p {
+            margin-bottom: 15px;
+            color: var(--text-secondary-color);
+        }
+        
+        .section strong {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .section ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 15px;
+        }
+
+        .section ul li {
+            padding: 8px 0 8px 25px;
+            position: relative;
+            color: var(--text-secondary-color);
+        }
+
+        .section ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+        
+        .section-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
+        }
+        
+        .placeholder-image {
+            background-color: #2a2a2a;
+            border: 1px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 300px;
+            flex-direction: column;
+            color: var(--text-secondary-color);
+        }
+        
+        .placeholder-image .prompt {
+             font-style: italic;
+             font-size: 0.9rem;
+             max-width: 80%;
+             margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        table th {
+            background-color: var(--primary-variant-color);
+            color: white;
+            font-weight: 500;
+        }
+
+        table tr {
+            background-color: transparent;
+        }
+
+        table tr:nth-of-type(even) {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .summary {
+            text-align: center;
+            font-style: italic;
+            color: var(--secondary-color);
+            margin-top: 30px;
+            font-size: 1.1rem;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary-color);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Anatomie d'une I.A.</h1>
+            <p class="subtitle">Une exploration de l'architecture technique de Clémence</p>
+        </header>
+
+        <main>
+            <!-- SECTION 1: INFRASTRUCTURE -->
+            <section class="section">
+                <h2><span class="icon">🛡️</span> 1. La Forteresse Numérique : Infrastructure Serveur</h2>
+                <div class="placeholder-image">
+                    <span>IMAGE 1 : INFRASTRUCTURE</span>
+                    <p class="prompt">Prompt : "Forteresse de données numérique, lignes de néon bleues et violettes brillantes sur des serveurs sombres, représentant une infrastructure cloud robuste. Une icône de bouclier est subtilement intégrée au rack de serveur central. Style art vectoriel, minimaliste et futuriste."</p>
+                </div>
+                <p>
+                    Le cœur battant de Clémence réside sur une fondation solide et sécurisée, hébergée au sein du cloud Hetzner. Ce n'est pas un simple serveur, mais une forteresse numérique conçue pour la performance et la fiabilité. Le modèle <strong>Hetzner Cloud CX33</strong> offre un équilibre parfait entre puissance de calcul (2 vCPU), mémoire vive (8 GB RAM) et rapidité de stockage (80 GB), garantissant une réactivité à toute épreuve.
+                </p>
+                <p>
+                    L'ensemble est gouverné par <strong>Ubuntu 24.04.3 LTS</strong>, un choix qui privilégie la stabilité et la sécurité sur le long terme. La sécurité est un principe non négociable : l'accès au système est verrouillé par des clés SSH uniques, le compte `root` est désactivé, et un pare-feu strict ne laisse passer que le trafic essentiel sur les ports 22 (SSH) et 443 (HTTPS).
+                </p>
+                <h3>Une Stratégie de Sauvegarde à Trois Niveaux</h3>
+                <p>
+                    Pour parer à toute éventualité, une triple ligne de défense protège l'intégrité de Clémence :
+                </p>
+                <ul>
+                    <li><strong>Sauvegarde des Données :</strong> Chaque nuit à 3h00, la base de données est immortalisée dans un "dump" SQL compressé, conservé précieusement pendant sept jours. C'est la mémoire à court terme, sécurisée.</li>
+                    <li><strong>Versionning du Code :</strong> Immédiatement après, la configuration et le code source de l'application sont synchronisés avec un référentiel privé sur GitHub. C'est l'ADN de Clémence, protégé et versionné.</li>
+                    <li><strong>Gestion des Logs :</strong> Les journaux d'activité, essentiels mais volubiles, sont gérés par une rotation automatique pour ne jamais saturer l'espace vital du système.</li>
+                </ul>
+            </section>
+
+            <!-- SECTION 2: STACK TECHNIQUE -->
+            <section class="section">
+                <h2><span class="icon">📦</span> 2. L'Orchestre de Services : La Stack Technologique</h2>
+                <div class="placeholder-image">
+                    <span>IMAGE 2 : STACK TECHNOLOGIQUE</span>
+                    <p class="prompt">Prompt : "Une représentation abstraite de conteneurs Docker comme des cubes lumineux et interconnectés flottant dans un espace numérique sombre. Des lignes de lumière circulent entre eux, symbolisant le flux de données. Le cube principal a un subtil logo de baleine gravé. Esthétique tech-noir."</p>
+                </div>
+                <p>
+                    L'élégance de l'architecture de Clémence repose sur sa modularité. Grâce à <strong>Docker Compose</strong>, l'application n'est pas un bloc monolithique, mais un orchestre de services spécialisés, chacun jouant sa partition à la perfection dans un environnement isolé et contrôlé.
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Image Docker</th>
+                            <th>Rôle Clé</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>OpenClaw</strong></td>
+                            <td><code>openclaw:latest</code></td>
+                            <td>Le maestro. C'est le cœur de l'assistant, l'intelligence centrale qui traite les requêtes et orchestre les actions.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Caddy</strong></td>
+                            <td><code>caddy:alpine</code></td>
+                            <td>Le portier vigilant. Il gère tout le trafic entrant, sécurise les communications avec le HTTPS (via Let's Encrypt) et sert de reverse proxy.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Postgres</strong></td>
+                            <td><code>postgres:16-alpine</code></td>
+                            <td>Le gardien de la mémoire. Il assure la persistance des données système critiques dans une base de données robuste et efficace.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <!-- SECTION 3: CONFIGURATION IA -->
+            <section class="section">
+                <h2><span class="icon">🧠</span> 3. L'Esprit de la Machine : Configuration de Clémence</h2>
+                <div class="placeholder-image">
+                    <span>IMAGE 3 : CONFIGURATION IA</span>
+                    <p class="prompt">Prompt : "Une représentation stylisée et abstraite du réseau de neurones d'une IA. Une toile complexe et lumineuse de filaments de lumière formant la silhouette d'une tête humaine sur un fond sombre. Le cœur est une lumière vive et pulsante représentant le modèle Gemini 2.5 Pro. Futuriste, élégant."</p>
+                </div>
+                <p>
+                    Au-delà du code et de l'infrastructure se trouve l'essence de Clémence : son identité, son intelligence et sa mémoire. Ces éléments définissent sa personnalité et ses capacités uniques.
+                </p>
+                <ul>
+                    <li><strong>Identité :</strong> Sa personnalité, ses directives et ses limites sont méticuleusement définies dans son "System Prompt", une sorte de constitution numérique qui guide chacune de ses interactions.</li>
+                    <li><strong>Cerveau (LLM) :</strong> Le moteur de sa pensée est <strong>Google Gemini 2.5 Pro</strong>, un modèle de langage de pointe choisi pour son excellent ratio performance/coût. Pour donner vie à l'imagination, elle s'appuie sur la puissance créative de <strong>OpenAI DALL-E 3</strong>.</li>
+                    <li><strong>Mémoire :</strong> Clémence possède une mémoire à long terme active, basée sur un système de recherche vectorielle (via Gemini Embeddings). Cela lui permet de se souvenir de conversations passées et de contextes importants, rendant chaque dialogue plus pertinent.</li>
+                </ul>
+            </section>
+
+            <!-- SECTION 4: INTÉGRATIONS -->
+            <section class="section">
+                <h2><span class="icon">🔗</span> 4. Connectée au Monde : Intégrations et Services</h2>
+                <div class="placeholder-image">
+                    <span>IMAGE 4 : INTÉGRATIONS</span>
+                    <p class="prompt">Prompt : "Un orbe central lumineux représentant l'IA, avec des flux de données lumineux s'étendant vers l'extérieur pour se connecter à d'autres logos abstraits flottants pour Telegram, GitHub et des outils d'automatisation. Les connexions sont vibrantes et actives. Fond sombre, esthétique cyberpunk."</p>
+                </div>
+                <h3>✅ Services Actifs au Quotidien</h3>
+                <p>
+                    Clémence est déjà connectée à des services essentiels qui lui permettent d'agir et de communiquer :
+                </p>
+                <ul>
+                    <li><strong>Telegram :</strong> Le canal de discussion principal, son interface privilégiée pour interagir avec vous de manière fluide et instantanée.</li>
+                    <li><strong>GitHub :</strong> Sa police d'assurance. Toute sa configuration y est sauvegardée automatiquement, garantissant une traçabilité et une restauration facile.</li>
+                </ul>
+                <h3>🔑 Prêtes pour l'Avenir</h3>
+                <p>
+                    Certaines connexions sont déjà prêtes, attendant simplement d'être activées pour décupler ses capacités :
+                </p>
+                <ul>
+                    <li><strong>Supabase (Base de Données Cloud) :</strong> Une extension de mémoire quasi infinie pour stocker des données structurées, des logs étendus, ou servir de fondation à de futures applications web ou mobiles.</li>
+                    <li><strong>n8n (Automatisation) :</strong> C'est le "bras armé" de Clémence. n8n lui permettra de se connecter à des centaines d'autres services (emails, agendas, réseaux sociaux, etc.) sans écrire une seule ligne de code, transformant ses décisions en actions concrètes dans le monde numérique.</li>
+                </ul>
+            </section>
+            
+            <!-- SECTION 5: ROADMAP -->
+            <section class="section">
+                <h2><span class="icon">🚀</span> 5. L'Horizon des Possibles : Feuille de Route</h2>
+                <div class="placeholder-image">
+                    <span>IMAGE 5 : ROADMAP</span>
+                    <p class="prompt">Prompt : "Un horizon numérique avec un chemin lumineux s'étirant au loin. Le long du chemin, des icônes holographiques représentent les capacités futures : e-mail, calendrier, documents, web scraping. Une icône de fusée décolle au début du chemin. Design optimiste, futuriste et épuré."</p>
+                </div>
+                <h3>Ce que Clémence peut faire AUJOURD'HUI</h3>
+                <p>
+                    Les fondations actuelles lui confèrent déjà des compétences solides et polyvalentes :
+                </p>
+                <ul>
+                    <li><strong>Adaptabilité :</strong> Elle ajuste son comportement et son ton en fonction du contexte de la conversation.</li>
+                    <li><strong>Conversation Naturelle :</strong> Elle maintient le contexte, se souvient des échanges et interagit avec une personnalité définie.</li>
+                    <li><strong>Mémoire à Long Terme :</strong> Elle peut retenir et réutiliser des informations clés sur de longues périodes.</li>
+                    <li><strong>Créativité Visuelle :</strong> Elle peut générer des images uniques sur simple demande.</li>
+                    <li><strong>Auto-préservation :</strong> Elle assure elle-même la sauvegarde complète de son état et de sa configuration.</li>
+                </ul>
+                <h3>Ce qu'elle pourra faire DEMAIN</h3>
+                <p>
+                    L'avenir est une page blanche prête à être écrite. Les prochaines étapes de son évolution se concentreront sur l'expansion de son champ d'action pour devenir une assistante encore plus proactive et intégrée :
+                </p>
+                <ul>
+                    <li>Orchestrer des sous-agents IA dédiés à des tâches spécifiques.</li>
+                    <li>Gérer vos emails et votre calendrier pour vous libérer du temps.</li>
+                    <li>Analyser, résumer et générer des documents complexes.</li>
+                    <li>Se connecter à vos outils de productivité (Notion, Trello, Slack).</li>
+                    <li>Effectuer une veille informationnelle en explorant le web.</li>
+                </ul>
+                <p class="summary">
+                    En résumé : OpenClaw est le <strong>Cerveau</strong> central, n8n sera les <strong>Mains</strong>.
+                </p>
+            </section>
+        </main>
+        
+        <footer>
+            <p>Rapport de Configuration Généré le 9 Février 2026</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
